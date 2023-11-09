@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Soccer Field</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: green;
+      }
+      .banner img {
+        width: 100vw;
+        height: auto;
+        display: block;
+      }
+      .banner {
+        margin: 0;
+      }
+      .main-content {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        min-height: 50vh;
+        background-color: white;
+      }
+      .soccer-field-container {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+      }
+      .sidebar {
+        width: 20vw;
+        background-color: #f1f1f1;
+        padding: 10px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .sidebar a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #eee;
+      }
+      .sidebar a:hover {
+        background-color: #ddd;
+      }
+      .soccer-field {
+        background-image: url('https://static.vecteezy.com/system/resources/previews/005/961/252/non_2x/top-view-of-green-football-pitch-or-soccer-field-vector.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height: 70vh;
+        width: 80vw;
+      }
+
+      .player {
+        position: absolute;
+        cursor: pointer;
+      }
+
+      .player img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+
+      .player1 {
+        top: 50%;
+        left: 15%;
+      }
+      .player2 {
+        top: 15%;
+        left: 15%;
+      }
+      .player3 {
+        top: 85%;
+        left: 10%;
+      }
+      .player4 {
+        top: 15%;
+        left: 35%;
+      }
+      .player5 {
+        top: 50%;
+        left: 35%;
+      }
+      .player6 {
+        top: 85%;
+        left: 25%;
+      }
+      .player7 {
+        top: 50%;
+        left: 50%;
+      }
+
+      /* Additional CSS for the text container inside the modal */
+      .video-modal-text {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #fff; /* Or any other color you want for the background */
+        color: #000; /* Color of the text */
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      /* Adjust the modal content to accommodate the text container */
+      #videoModal {
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 50px; /* Add padding to the bottom equal to the height of the text container */
+      }
+      .video-info {
+        background-color: white;
+        padding: 10px;
+        color: #333;
+        text-align: center;
+        width: 640px; /* same width as the video player */
+        margin-top: 10px;
+        /* Add any additional styles you want here */
+      }
+
+      #youtube-player {
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* padding: 10px; */
+        background-color: #eaeaea;
+      }
+
+      .footer img {
+        width: auto;
+        height: 50vh;
+        margin-right: 2cm;
+      }
+
+      .footer-text {
+        font-size: 1rem;
+      }
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+      }
+
+      /* Style the buttons inside the tab */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background-color: #ccc;
+      }
+      /* Style the buttons/links inside the tab */
+      .tab .tablinks {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        text-decoration: none; /* This removes the underline from links */
+        color: inherit; /* This ensures that the link color is the same as the button text color */
+      }
+
+      /* Change background color of buttons/links on hover */
+      .tab .tablinks:hover {
+        background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab .tablinks.active {
+        background-color: #ccc;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="banner">
+      <img src="banner.jpeg" alt="Banner" />
+    </div>
+    <div class="tab">
+      <a href="index.html" class="tablinks">Inicio</a>
+      <a href="historia.html" class="tablinks">Historia</a>
+      <a href="trabajosDeGrado.html" class="tablinks">Trabajos de grado</a>
+      <a href="conclusiones.html" class="tablinks">Conclusiones</a>
+      <a href="anexos.html" class="tablinks">Anexos</a>
+    </div>
+
+    <div class="main-content">
+      <div class="soccer-field-container">
+        <div class="soccer-field">
+          <div
+            class="player player1 tooltip"
+            onclick="openVideo('XpsX0bJ-9IM','ADN Deportivo: Escribe en Semana y comenta en ESPN, es Pilar Velasquez. Esta gran periodista se encuentra siendo entrevistada por Inés Alvarez, una periodista hecha por Inteligencia Artificial. Inés tiene un espacio de confrontación y debate con Pilar sobre cuál ha sido el camino de la mujer en el periodismo deportivo y si realmente esta está por cumplir una cuota de género. Inclusive en este debate la Inteligencia Artificial no se quedó atrás.')"
+          >
+            <img src="img1.png" alt="Player 1" />
+            <span class="tooltiptext">ADN Deportivo</span>
+          </div>
+          <div
+            class="player player2 tooltip"
+            onclick="openVideo('uib0zMZAMUw','Cara a Cara: Liliana Salazar y Liche Duran se encontraron para discutir sobre el rol de la mujer en el periodismo deportivo. Liliana es una pionera del periodismo deportivo, fue una de las primeras mujeres en incursionar en este campo. Liche es una santandereana que creció siendo la única periodista deportiva de su ciudad, para llegar a la capital y seguir encontrando un vacío. A través de las redes sociales, estas dos grandes periodistas se encontraron para llegar a una conclusión; la mujer puede y está hablando de fútbol.' )"
+          >
+            <img src="img2.jpeg" alt="Player 2" />
+            <span class="tooltiptext">Cara a cara</span>
+          </div>
+          <div
+            class="player player3 tooltip"
+            onclick="openVideo('F7L28zMSpZg','Fuera de la cancha: La voz de este manizaleño es reconocible desde hace más de 30 años que está en el medio, la voz de Ricardo Orrego. A través de un audiograma, Ricardo los llevará a través de la vista y la audición, por todos su recorrido hasta llegar a ser el director de deportes de Caracol Televisión. Será una experiencia sensorial, en donde definirá cómo ha llegado hasta acá, como la mujer ha sido clave en su desarrollo y como él ha visto su evolución como director y como compañero de set de diferentes periodistas deportivos.')"
+          >
+            <img src="img3.jpeg" alt="Player 3" />
+            <span class="tooltiptext">Fuera de la cancha</span>
+          </div>
+          <div
+            class="player player4 tooltip"
+            onclick="openVideo('9f7P43kHsVA','Reporteando: No solo hay que conocer y cuestionar a los periodistas, sino también conocer la visión de los directivos y el porqué de ciertas decisiones. El Espectador, Win Sport y ESPN se enfrentan en un debate para cuestionar el rol de la mujer dentro de los medios y debatir ciertas decisiones frente a los cargos, posiciones y tareas. Olga Lucia Barona, Eder Torre y Juan Pablo Sepulveda se adueñan del micrófono para hablar de su medio en concreto y explicar cómo funcionan las cosas. ')"
+          >
+            <img src="img4.jpeg" alt="Player 4" />
+            <span class="tooltiptext">Reporteando</span>
+          </div>
+          <div
+            class="player player5 tooltip"
+            onclick="openVideo('y57gtjbsnH8','Zona de traslado: Ser pionera del periodismo deportivo no fue nada fácil y que lo digan ellas mismas, Claudia Helena Hernandez y Blanca Luz Uribe. Estas dos periodistas fueron las que abrieron el camino para que hoy en día muchas mujeres vivan este camino, el de ser periodistas deportivas. A través de un debate con Inés Alvarez, con inteligencia artificial, ambas recuerdan sus inicios, los retos enfrentados y dan una mirada global sobre lo que era antes el periodismo deportivo y como lo ven hoy en día. ')"
+          >
+            <img src="img5.jpeg" alt="Player 5" />
+            <span class="tooltiptext">Zona de traslado</span>
+          </div>
+          <div
+            class="player player6 tooltip"
+            onclick="openVideo('_36uL5zi_1A')"
+          >
+            <img src="hombres.png" alt="Player 6" />
+            <span class="tooltiptext">Desde la banca</span>
+          </div>
+          <div
+            class="player player7 tooltip"
+            onclick="openVideo('rYA397h_SGY','Desde la banca: La presencia de la mujer en la narración no ha sido muy marcada, todavía el hombre es numéricamente más presente y esa no es la excepción para Antonio Casale, Steven Arce, Carlos Orduz, Cesar Augusto Londoño y Juan Felipe Cadavid. Estos 5 periodistas deportivos se encuentran en una discusión, a través de un podcast, dentro de la cancha para concluir en 1 sola cosa; si existe el machismo en el periodismo deportivo, pero cada vez se va cerrando esa brecha. 5 voces, 5 diferentes visiones, 5 experiencias se unen para debatir dentro y fuera de la cancha.')"
+          >
+            <img src="vuelta.png" alt="Player 7" />
+            <span class="tooltiptext">Vuelta futbolistica</span>
+          </div>
+        </div>
+        <div class="sidebar">
+          <!-- Sidebar content goes here -->
+          <h3>Guia</h3>
+          <a
+            href="#"
+            onclick="openVideo('XpsX0bJ-9IM','ADN Deportivo: Escribe en Semana y comenta en ESPN, es Pilar Velasquez. Esta gran periodista se encuentra siendo entrevistada por Inés Alvarez, una periodista hecha por Inteligencia Artificial. Inés tiene un espacio de confrontación y debate con Pilar sobre cuál ha sido el camino de la mujer en el periodismo deportivo y si realmente esta está por cumplir una cuota de género. Inclusive en este debate la Inteligencia Artificial no se quedó atrás.')"
+            >ADN Deportivo</a
+          >
+          <a
+            href="#"
+            onclick="openVideo('uib0zMZAMUw','Cara a Cara: Liliana Salazar y Liche Duran se encontraron para discutir sobre el rol de la mujer en el periodismo deportivo. Liliana es una pionera del periodismo deportivo, fue una de las primeras mujeres en incursionar en este campo. Liche es una santandereana que creció siendo la única periodista deportiva de su ciudad, para llegar a la capital y seguir encontrando un vacío. A través de las redes sociales, estas dos grandes periodistas se encontraron para llegar a una conclusión; la mujer puede y está hablando de fútbol. ')"
+            >Cara a cara</a
+          >
+          <a
+            href="#"
+            onclick="openVideo('F7L28zMSpZg','Fuera de la cancha: La voz de este manizaleño es reconocible desde hace más de 30 años que está en el medio, la voz de Ricardo Orrego. A través de un audiograma, Ricardo los llevará a través de la vista y la audición, por todos su recorrido hasta llegar a ser el director de deportes de Caracol Televisión. Será una experiencia sensorial, en donde definirá cómo ha llegado hasta acá, como la mujer ha sido clave en su desarrollo y como él ha visto su evolución como director y como compañero de set de diferentes periodistas deportivos.')"
+            >Fuera de la cancha</a
+          >
+          <a
+            href="#"
+            onclick="openVideo('9f7P43kHsVA','Reporteando: No solo hay que conocer y cuestionar a los periodistas, sino también conocer la visión de los directivos y el porqué de ciertas decisiones. El Espectador, Win Sport y ESPN se enfrentan en un debate para cuestionar el rol de la mujer dentro de los medios y debatir ciertas decisiones frente a los cargos, posiciones y tareas. Olga Lucia Barona, Eder Torre y Juan Pablo Sepulveda se adueñan del micrófono para hablar de su medio en concreto y explicar cómo funcionan las cosas. ')"
+            >Reporteando</a
+          >
+          <a
+            href="#"
+            onclick="openVideo('y57gtjbsnH8','Zona de traslado: Ser pionera del periodismo deportivo no fue nada fácil y que lo digan ellas mismas, Claudia Helena Hernandez y Blanca Luz Uribe. Estas dos periodistas fueron las que abrieron el camino para que hoy en día muchas mujeres vivan este camino, el de ser periodistas deportivas. A través de un debate con Inés Alvarez, con inteligencia artificial, ambas recuerdan sus inicios, los retos enfrentados y dan una mirada global sobre lo que era antes el periodismo deportivo y como lo ven hoy en día. ')"
+            >Zona de traslado</a
+          >
+          <a
+            href="#"
+            onclick="openVideo('_36uL5zi_1A','Desde la banca: La presencia de la mujer en la narración no ha sido muy marcada, todavía el hombre es numéricamente más presente y esa no es la excepción para Antonio Casale, Steven Arce, Carlos Orduz, Cesar Augusto Londoño y Juan Felipe Cadavid. Estos 5 periodistas deportivos se encuentran en una discusión, a través de un podcast, dentro de la cancha para concluir en 1 sola cosa; si existe el machismo en el periodismo deportivo, pero cada vez se va cerrando esa brecha. 5 voces, 5 diferentes visiones, 5 experiencias se unen para debatir dentro y fuera de la cancha.')"
+            >Desde la banca</a
+          >
+          <a
+            href="#"
+            onclick="openVideo('rYA397h_SGY','Vuelta futbolistica: Colombia es uno de los países más futboleros del mundo, pero Argentina y Brasil le llevan la delantera. Marina Granziera y Juliana Salazar se encuentran en un videopodcast para discutir sobre su recorrido tanto en Colombia como en otros países y su impacto. Estas dos grandes periodistas han tenido una gran evolución, incluso llegando a ser la cara representativa de ciertos medios.')"
+            >Vuelta futbolistica</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div id="videoModal">
+      <div id="youtube-player" style="width: 640px; height: 390px"></div>
+      <div class="video-info">Text related to the video goes here</div>
+    </div>
+    <div class="footer">
+      <img src="fea.png" alt="Image" />
+      <div class="footer-text">
+        Elena Ángel Ochoa estudiante de Comunicación Social con énfasis en
+        periodismo y publicidad de la Pontificia Universidad Javeriana.
+        Apasionada por el deporte, la comunicación y la investigación. Su tesis
+        nace a partir de una preocupación sobre el rol de la mujer en el
+        periodismo deportivo, razón por la cual investigo, hablo y cuestiono a
+        periodistas deportivos colombianos.
+      </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-player', {
+          height: '390',
+          width: '640',
+          videoId: '',
+          events: {
+            onReady: onPlayerReady,
+          },
+        });
+      }
+      function onPlayerReady(event) {
+        event.target.pauseVideo();
+      }
+      function openVideo(videoId, videoText) {
+        player.loadVideoById(videoId);
+        var modal = document.getElementById('videoModal');
+        var infoArea = document.querySelector('.video-info');
+        infoArea.textContent = videoText; // Set the text dynamically
+        modal.style.display = 'flex';
+        window.onclick = function (event) {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+            player.stopVideo();
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

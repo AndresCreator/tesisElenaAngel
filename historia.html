@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image and Formatted Text Page</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #d5e7b8;
+      }
+
+      .text-container {
+        white-space: pre-wrap; /* pre-wrap preserves white spaces and also wraps text */
+        font-size: 1.2em;
+        line-height: 1.5;
+        margin: 20px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        background-color: #f8f8f8;
+        max-width: 80%;
+        text-align: justify;
+      }
+
+      img {
+        max-width: 100%; /* Limit the width to the parent container's width */
+        max-height: 100vh; /* Limit the height to the viewport's height */
+        width: auto; /* Scale the width automatically to maintain aspect ratio */
+        height: auto; /* Scale the height automatically to maintain aspect ratio */
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        display: block; /* Remove the inline nature of images to allow margin auto to center */
+        margin-left: auto; /* Center the image horizontally */
+        margin-right: auto; /* Center the image horizontally */
+        object-fit: contain; /* Ensures the image maintains its aspect ratio */
+      }
+
+      .image-container {
+        text-align: center; /* Center the image container */
+        margin: 20px;
+        max-width: 25%; /* Set the max width for the image container */
+        height: auto; /* Ensure the container scales with the image height */
+      }
+      .tab {
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        margin: 0;
+        padding: 0;
+      }
+
+      .tab .tablinks {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        text-decoration: none;
+        color: black; /* Ensure the text is visible */
+      }
+
+      .tab .tablinks:hover {
+        background-color: #ddd;
+      }
+
+      .tab .tablinks.active {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tab">
+      <a href="index.html" class="tablinks">Inicio</a>
+      <a href="historia.html" class="tablinks">Historia</a>
+      <a href="trabajosDeGrado.html" class="tablinks">Trabajos de grado</a>
+      <a href="conclusiones.html" class="tablinks">Conclusiones</a>
+      <a href="anexos.html" class="tablinks">Anexos</a>
+    </div>
+
+    <div class="image-container">
+      <img src="fea.png" alt="Se salvaron de ver esta foto" />
+    </div>
+
+    <pre class="text-container">
+Este trabajo se inserta a raíz de las motivaciones laborales y emocionales de la presencia de la mujer en el periodismo deportivo. Se viven tensiones actuales que involucran el poder de la mujer en campos socialmente masculinizados limitando el desarrollo de ellas. Además, nace también de preocupaciones hacia casos de abuso laboral y sexual, actos machistas y violentos, decisiones por medio de cuota de género y acciones que no permitían un trabajo libre y respetado para el género femenino comparado al masculino.
+
+El machismo, el feminismo, la cuota de género, los abusos sexuales han sido temas recurrentes desde los últimos años, por el crecimiento de las redes sociales y la facilidad de comunicarse. Sin embargo, de cierta forma, han sido temas que se oyen mucho, pero se discuten poco. Terminando siendo temas tabú o temas censurados, que viven como sombra detrás de uno sin poder hablar de ella. Es por eso, que esta tesis buscó hablar y descubrir estos temas que están presentes en la vida cotidiana.
+
+No es sorpresa, que la mujer siempre ha sido el sexo, no inferior, pero si más vulnerado a través de los tiempos. La mujer ha vivido una evolución frente a lo social, económico, físico y demás campos que han permitido abrir poco a poco un espacio más grande en las sociedades. El periodismo deportivo, no es la excepción. Como mencionado anteriormente, la mujer ha incursionado en esta labor periodística desafiando los estándares que se tenía entre el deporte, la mujer y los trabajos.
+
+La misión de este producto es visibilizar la evolución del periodismo deportivo frente a las mujeres. Es darle la oportunidad a los y las periodistas, de aceptar o negar todas las ideas sueltas que se tienen sobre el periodismo deportivo. Caracterización de la mujer en el periodismo es un producto que busca identificar, conocer y reconocer la trayectoria del sexo femenino en el campo deportivo, a través de la voz masculina, la voz femenina, los jefes, los redactores y todos aquellos involucrados.
+
+A través de este producto se reconocen cada una de las experiencias vividas, por los periodistas deportivos más influyentes del país. Se reconoce y se da valor a las experiencias de cada uno, pues son ellos los que realmente conocen del tema y viven dentro de ello. Es el resultado de cuestionar el periodismo deportivo, preguntar la presencia de la mujer e involucrarse en el medio para realmente saber la Caracterización de la mujer en el periodismo deportivo.</pre
+    >
+  </body>
+</html>
