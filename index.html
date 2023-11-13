@@ -6,7 +6,7 @@
     <style>
       body {
         margin: 0;
-        font-family: Arial, sans-serif;
+        font-family: Trebuchet MS, sans-serif;
         background-color: green;
       }
       .banner img {
@@ -181,9 +181,13 @@
       }
       /* Style the tab */
       .tab {
-        overflow: hidden;
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Centers the tab links */
         border: 1px solid #ccc;
         background-color: #f1f1f1;
+        margin: 0;
+        padding: 0;
       }
 
       /* Style the buttons inside the tab */
@@ -209,14 +213,13 @@
       /* Style the buttons/links inside the tab */
       .tab .tablinks {
         background-color: inherit;
-        float: left;
         border: none;
         outline: none;
         cursor: pointer;
         padding: 14px 16px;
         transition: 0.3s;
-        text-decoration: none; /* This removes the underline from links */
-        color: inherit; /* This ensures that the link color is the same as the button text color */
+        text-decoration: none;
+        color: black; /* Ensure the text is visible */
       }
 
       /* Change background color of buttons/links on hover */
@@ -246,7 +249,7 @@
     <div class="tab">
       <a href="index.html" class="tablinks">Inicio</a>
       <a href="historia.html" class="tablinks">Historia</a>
-      <a href="trabajosDeGrado.html" class="tablinks">Trabajos de grado</a>
+      <a href="trabajosDeGrado.html" class="tablinks">Trabajo de grado</a>
       <a href="conclusiones.html" class="tablinks">Conclusiones</a>
       <a href="anexos.html" class="tablinks">Anexos</a>
     </div>
